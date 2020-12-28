@@ -14,6 +14,7 @@ class DataController extends Controller
         $request      = $client->get('https://portal.edcd.gov.np/rest/api/fetch?filter=casesBetween&type=dayByDay&sDate=2020-01-01&eDate=2020-12-24&disease=COVID-19', ['verify' => false]);
         $response     = $request->getBody();
         $decoded_info = json_decode($response);
+		dd($decoded_info);
         Data::truncate();
         foreach ($decoded_info as $all_info) {
             $new_row = new Data;
@@ -43,10 +44,10 @@ class DataController extends Controller
 		dd('Saved');
     }
 
-    public function getUniquesvalueCount()
+    public function storeGenderAndValue()
     {
         // $data = Data::pluck('district')->get();
-        $data = Data::select('district')->distinct()->get();
+        $data = Data::select('date')->orderby('date','desc')->distinct()->get()->pluck('date');
         dd($data);
     }
 }

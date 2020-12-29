@@ -12,4 +12,4 @@
 */
 
 Route::get('/','DataController@index');
-Route::get('/test','DataController@getUniquesvalueCount');
+Route::get('/test','DataController@storeGenderAndValue');
